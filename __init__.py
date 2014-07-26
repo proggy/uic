@@ -38,19 +38,25 @@ Background information
 ----------------------
 
 http://en.wikipedia.org/wiki/UIC_wagon_numbers"""
+#
 # 2014-01-31 - 2014-06-09
 
+import os
+import sys
 
-def wagonnumbers(wagonnumber_pattern, max_output=10000):
+
+def wagonnumbers(wagonnumber_pattern, fromfile=None):
     """Return all valid combinations of UIC wagon numbers based on the given
     pattern.  The pattern has to be of the form "xxxxxxx-s". The number of
-    digits before the dash is arbitrary. *s* is the self-check digit. Any
+    digits before the dash is arbitrary. "s" is the self-check digit. Any
     digit, including the self-check digit, may be replaced by a placeholder
     "?". Whitespace is ignored.
 
-    Note: For too many placeholders, the computation time can become very
-    large.  The output can therefore be limited by specifying a maximum number
-    of output combinations *max_output* (default: 10000).
+    If *fromfile* is not *None*, filter the output by the given digit blocks
+    found in the text file *fromfile*. The file must contain one block of
+    digits per line, where the number of digits must match the number of
+    placeholders "?" in the wagonnumber pattern. Dashes "-" are ignored, so the
+    file may contain lines of the form "xxx-s".
 
     Example usage:
 
@@ -71,25 +77,54 @@ def wagonnumbers(wagonnumber_pattern, max_output=10000):
     []
     >>> wagonnumbers('33 80 076 5 115-5')
     ['33 80 076 5 115-5']
+    >>> wagonnumbers('31 80 437 3 ???-?', fromfile='era4-white')
+    ['31 80 437 3 300-1',
+     '31 80 437 3 811-7',
+     '31 80 437 3 217-7',
+     '31 80 437 3 797-8',
+     '31 80 437 3 354-8',
+     '31 80 437 3 565-9']
 
     Background information:
     http://en.wikipedia.org/wiki/UIC_wagon_numbers"""
     # 2014-01-31 - 2014-02-01
+    wagonnumbers = []
     qnum = wagonnumber_pattern.count('?')
     if qnum == 0:
         if check_wagonnumber(wagonnumber_pattern):
-            return [wagonnumber_pattern]
+            wagonnumbers = [wagonnumber_pattern]
         else:
-            return []
-    wagonnumbers = []
-    for combind in xrange(10**qnum):
-        combstr = '%0*i' % (qnum, combind)
-        comb = [int(char) for char in combstr]
-        wagonnumber = create_wagonnumber(wagonnumber_pattern, comb)
-        if check_wagonnumber(wagonnumber):
-            wagonnumbers.append(wagonnumber)
-        if len(wagonnumbers) >= max_output:
-            break
+            wagonnumbers = []
+    else:
+        if fromfile:
+            # consider only combinations given in the file
+            fromfile = os.path.expanduser(fromfile)
+            with open(fromfile, 'r') as f:
+                digitblocks = f.readlines()
+                for i in xrange(len(digitblocks)):
+                    digitblocks[i] = digitblocks[i].strip().replace('-', '')
+                #import columnize
+                #print columnize.columnize(digitblocks)
+            digitblocks
+            combinds = []
+            for digitblock in digitblocks:
+                if len(digitblock) != qnum:
+                    print >>sys.stderr, 'wagonnumbers: %s: ' % fromfile + \
+                                        'found block with wrong number of ' + \
+                                        'digits'
+                    sys.exit(1)
+                comb = [int(char) for char in digitblock]
+                wagonnumber = create_wagonnumber(wagonnumber_pattern, comb)
+                if check_wagonnumber(wagonnumber):
+                    wagonnumbers.append(wagonnumber)
+        else:
+            # consider all possible combinations
+            for combind in xrange(10**qnum):
+                combstr = '%0*i' % (qnum, combind)
+                comb = [int(char) for char in combstr]
+                wagonnumber = create_wagonnumber(wagonnumber_pattern, comb)
+                if check_wagonnumber(wagonnumber):
+                    wagonnumbers.append(wagonnumber)
     return wagonnumbers
 
 

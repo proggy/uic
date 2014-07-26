@@ -12,6 +12,19 @@
     <p><tt>Self-check&nbsp;digit&nbsp;calculator&nbsp;for&nbsp;UIC&nbsp;wagon&nbsp;numbers.&nbsp;&nbsp;Tools&nbsp;around&nbsp;UIC&nbsp;wagon<br>
 numbers.&nbsp;Check&nbsp;validity&nbsp;of&nbsp;self-check&nbsp;digits,&nbsp;calculate&nbsp;self-check&nbsp;digits.<br>
 &nbsp;<br>
+Examples:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-check_wagonnumber">check_wagonnumber</a>('371&nbsp;015-9')<br>
+True<br>
+&gt;&gt;&gt;&nbsp;<a href="#-cdigit">cdigit</a>('371&nbsp;015')<br>
+9<br>
+&gt;&gt;&gt;&nbsp;<a href="#-wagonnumbers">wagonnumbers</a>('371&nbsp;0??-9')<br>
+['371&nbsp;001-9',&nbsp;'371&nbsp;015-9',&nbsp;'371&nbsp;020-9',&nbsp;'371&nbsp;039-9',&nbsp;'371&nbsp;044-9',&nbsp;'371&nbsp;058-9',&nbsp;'371&nbsp;063-9',&nbsp;'371&nbsp;077-9',&nbsp;'371&nbsp;082-9',&nbsp;'371&nbsp;096-9']<br>
+&nbsp;<br>
+&nbsp;<br>
+Background&nbsp;information<br>
+----------------------<br>
+&nbsp;<br>
 <a href="http://en.wikipedia.org/wiki/UIC_wagon_numbers">http://en.wikipedia.org/wiki/UIC_wagon_numbers</a></tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -28,44 +41,114 @@ numbers.&nbsp;Check&nbsp;validity&nbsp;of&nbsp;self-check&nbsp;digits,&nbsp;calc
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-cdigit"><strong>cdigit</strong></a>(short_wagonnumber)</dt><dd><tt>Compute&nbsp;self-check&nbsp;digit&nbsp;for&nbsp;the&nbsp;given&nbsp;short&nbsp;wagon&nbsp;number.&nbsp;&nbsp;By&nbsp;short<br>
+<td width="100%"><dl><dt><a name="-__main__"><strong>__main__</strong></a>()</dt></dl>
+ <dl><dt><a name="-cdigit"><strong>cdigit</strong></a>(short_wagonnumber)</dt><dd><tt>Compute&nbsp;self-check&nbsp;digit&nbsp;for&nbsp;the&nbsp;given&nbsp;short&nbsp;wagon&nbsp;number.&nbsp;&nbsp;By&nbsp;short<br>
 wagon&nbsp;number&nbsp;we&nbsp;mean&nbsp;one&nbsp;without&nbsp;the&nbsp;self-check&nbsp;digit&nbsp;(and&nbsp;without&nbsp;the<br>
-dash)&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+dash)&nbsp;at&nbsp;the&nbsp;end.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-cdigit">cdigit</a>('120&nbsp;002')<br>
+1</tt></dd></dl>
  <dl><dt><a name="-check_wagonnumber"><strong>check_wagonnumber</strong></a>(wagonnumber)</dt><dd><tt>Check&nbsp;the&nbsp;given&nbsp;wagonnumber&nbsp;for&nbsp;integrity&nbsp;(if&nbsp;it&nbsp;has&nbsp;the&nbsp;right<br>
 self-check&nbsp;digit).&nbsp;The&nbsp;wagon&nbsp;number&nbsp;must&nbsp;be&nbsp;of&nbsp;the&nbsp;form&nbsp;"xxxxxxx-x",&nbsp;where<br>
 each&nbsp;"x"&nbsp;stands&nbsp;for&nbsp;a&nbsp;digit.&nbsp;The&nbsp;number&nbsp;of&nbsp;digits&nbsp;before&nbsp;the&nbsp;dash&nbsp;is<br>
 arbitrary.&nbsp;&nbsp;If&nbsp;the&nbsp;self-check&nbsp;digit&nbsp;after&nbsp;the&nbsp;dash&nbsp;is&nbsp;valid,&nbsp;return&nbsp;True,<br>
-otherwise,&nbsp;return&nbsp;False.</tt></dd></dl>
+otherwise,&nbsp;return&nbsp;False.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-check_wagonnumber">check_wagonnumber</a>('120&nbsp;002-2')<br>
+False<br>
+&gt;&gt;&gt;&nbsp;<a href="#-check_wagonnumber">check_wagonnumber</a>('120&nbsp;002-1')<br>
+True</tt></dd></dl>
  <dl><dt><a name="-create_wagonnumber"><strong>create_wagonnumber</strong></a>(wagonnumber_pattern, comb)</dt><dd><tt>Create&nbsp;a&nbsp;wagonnumber&nbsp;by&nbsp;replacing&nbsp;the&nbsp;questionmarks&nbsp;"?"&nbsp;in&nbsp;a&nbsp;given<br>
-wagonnumber&nbsp;pattern&nbsp;by&nbsp;the&nbsp;digits&nbsp;given&nbsp;by&nbsp;the&nbsp;list&nbsp;"comb".&nbsp;The&nbsp;number&nbsp;of<br>
-questionmarks&nbsp;and&nbsp;the&nbsp;length&nbsp;of&nbsp;"comb"&nbsp;have&nbsp;to&nbsp;agree.&nbsp;&nbsp;Note:&nbsp;The&nbsp;resulting<br>
-wagon&nbsp;number&nbsp;is&nbsp;not&nbsp;checked&nbsp;for&nbsp;integrity.</tt></dd></dl>
- <dl><dt><a name="-diff10"><strong>diff10</strong></a>(n)</dt><dd><tt>Return&nbsp;difference&nbsp;of&nbsp;the&nbsp;given&nbsp;number&nbsp;to&nbsp;the&nbsp;next&nbsp;multiple&nbsp;of&nbsp;ten.</tt></dd></dl>
+wagonnumber&nbsp;pattern&nbsp;by&nbsp;the&nbsp;digits&nbsp;given&nbsp;by&nbsp;the&nbsp;list&nbsp;*comb*.&nbsp;The&nbsp;number&nbsp;of<br>
+questionmarks&nbsp;and&nbsp;the&nbsp;length&nbsp;of&nbsp;*comb*&nbsp;have&nbsp;to&nbsp;agree.<br>
+&nbsp;<br>
+Note:&nbsp;The&nbsp;resulting&nbsp;wagon&nbsp;number&nbsp;is&nbsp;not&nbsp;checked&nbsp;for&nbsp;integrity.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-create_wagonnumber">create_wagonnumber</a>('12?&nbsp;00?-1',&nbsp;[0,&nbsp;2])<br>
+'120&nbsp;002-1'</tt></dd></dl>
+ <dl><dt><a name="-diff10"><strong>diff10</strong></a>(n)</dt><dd><tt>Return&nbsp;difference&nbsp;of&nbsp;the&nbsp;given&nbsp;number&nbsp;to&nbsp;the&nbsp;next&nbsp;multiple&nbsp;of&nbsp;ten.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-diff10">diff10</a>(1)<br>
+9<br>
+&gt;&gt;&gt;&nbsp;<a href="#-diff10">diff10</a>(8)<br>
+2<br>
+&gt;&gt;&gt;&nbsp;<a href="#-diff10">diff10</a>(10)<br>
+0</tt></dd></dl>
  <dl><dt><a name="-digitsum"><strong>digitsum</strong></a>(n)</dt><dd><tt>Compute&nbsp;the&nbsp;digit&nbsp;sum&nbsp;of&nbsp;the&nbsp;given&nbsp;number.<br>
 &nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-digitsum">digitsum</a>(123)<br>
+6<br>
+&nbsp;<br>
 Courtesy&nbsp;to<br>
-<a href="http://stackoverflow.com/questions/14939953/sum-the-digits-of-a-number">http://stackoverflow.com/questions/14939953/sum-the-digits-of-a-number</a>-<br>
-python</tt></dd></dl>
+<a href="http://stackoverflow.com/questions/14939953/sum-the-digits-of-a-number-python">http://stackoverflow.com/questions/14939953/sum-the-digits-of-a-number-python</a></tt></dd></dl>
  <dl><dt><a name="-multiply21"><strong>multiply21</strong></a>(l)</dt><dd><tt>Multiply&nbsp;each&nbsp;of&nbsp;the&nbsp;given&nbsp;list&nbsp;of&nbsp;numbers&nbsp;individually&nbsp;from&nbsp;right&nbsp;to<br>
-left&nbsp;alternately&nbsp;by&nbsp;2&nbsp;and&nbsp;1.</tt></dd></dl>
- <dl><dt><a name="-parse_short_wagonnumber"><strong>parse_short_wagonnumber</strong></a>(short_wagonnumber)</dt><dd><tt>Parse&nbsp;given&nbsp;short&nbsp;wagon&nbsp;number&nbsp;(excluding&nbsp;the&nbsp;check&nbsp;digit).</tt></dd></dl>
+left&nbsp;alternately&nbsp;by&nbsp;2&nbsp;and&nbsp;1.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-multiply21">multiply21</a>([1,&nbsp;1,&nbsp;1,&nbsp;1])<br>
+[1,&nbsp;2,&nbsp;1,&nbsp;2]<br>
+&gt;&gt;&gt;&nbsp;<a href="#-multiply21">multiply21</a>([1,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;2])<br>
+[1,&nbsp;4,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;4]</tt></dd></dl>
+ <dl><dt><a name="-parse_short_wagonnumber"><strong>parse_short_wagonnumber</strong></a>(short_wagonnumber)</dt><dd><tt>Parse&nbsp;given&nbsp;short&nbsp;wagon&nbsp;number&nbsp;(excluding&nbsp;the&nbsp;check&nbsp;digit).<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-parse_short_wagonnumber">parse_short_wagonnumber</a>('120&nbsp;002')<br>
+[1,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;2]</tt></dd></dl>
  <dl><dt><a name="-parse_wagonnumber"><strong>parse_wagonnumber</strong></a>(wagonnumber)</dt><dd><tt>Parse&nbsp;given&nbsp;complete&nbsp;wagon&nbsp;number&nbsp;(including&nbsp;the&nbsp;check&nbsp;digit)&nbsp;of&nbsp;the<br>
-form&nbsp;"xxxxxxx-x".&nbsp;The&nbsp;number&nbsp;of&nbsp;digits&nbsp;before&nbsp;the&nbsp;dash&nbsp;is&nbsp;arbitrary.</tt></dd></dl>
+form&nbsp;"xxxxxxx-x".&nbsp;The&nbsp;number&nbsp;of&nbsp;digits&nbsp;before&nbsp;the&nbsp;dash&nbsp;is&nbsp;arbitrary.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-parse_wagonnumber">parse_wagonnumber</a>('120&nbsp;002-1')<br>
+([1,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;2],&nbsp;1)</tt></dd></dl>
  <dl><dt><a name="-parse_wagonnumber_pattern"><strong>parse_wagonnumber_pattern</strong></a>(wagonnumber_pattern)</dt><dd><tt>Parse&nbsp;given&nbsp;wagon&nbsp;number&nbsp;pattern&nbsp;of&nbsp;the&nbsp;form&nbsp;"xxxxxxx-x"&nbsp;where&nbsp;each&nbsp;of<br>
 the&nbsp;digits&nbsp;"x"&nbsp;may&nbsp;also&nbsp;be&nbsp;replaced&nbsp;by&nbsp;a&nbsp;questionmark&nbsp;"?".&nbsp;The&nbsp;number&nbsp;of<br>
-digits&nbsp;before&nbsp;the&nbsp;dash&nbsp;"-"&nbsp;is&nbsp;arbitrary.</tt></dd></dl>
- <dl><dt><a name="-total_digitsum"><strong>total_digitsum</strong></a>(l)</dt><dd><tt>Compute&nbsp;the&nbsp;total&nbsp;digit&nbsp;sum&nbsp;of&nbsp;the&nbsp;given&nbsp;list&nbsp;of&nbsp;numbers.</tt></dd></dl>
- <dl><dt><a name="-wagonnumbers"><strong>wagonnumbers</strong></a>(wagonnumber_pattern, max_output<font color="#909090">=10000</font>)</dt><dd><tt>Return&nbsp;all&nbsp;valid&nbsp;combinations&nbsp;of&nbsp;UIC&nbsp;wagon&nbsp;numbers&nbsp;based&nbsp;on&nbsp;the&nbsp;given<br>
+digits&nbsp;before&nbsp;the&nbsp;dash&nbsp;"-"&nbsp;is&nbsp;arbitrary.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-parse_wagonnumber_pattern">parse_wagonnumber_pattern</a>('120&nbsp;002-1')<br>
+(7,&nbsp;[1,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;2,&nbsp;1],&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6],&nbsp;[])<br>
+&gt;&gt;&gt;&nbsp;<a href="#-parse_wagonnumber_pattern">parse_wagonnumber_pattern</a>('120&nbsp;002-?')<br>
+(7,&nbsp;[1,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;2],&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5],&nbsp;[6])<br>
+&gt;&gt;&gt;&nbsp;<a href="#-parse_wagonnumber_pattern">parse_wagonnumber_pattern</a>('120&nbsp;00?-?')<br>
+(7,&nbsp;[1,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0],&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4],&nbsp;[5,&nbsp;6])</tt></dd></dl>
+ <dl><dt><a name="-total_digitsum"><strong>total_digitsum</strong></a>(l)</dt><dd><tt>Compute&nbsp;the&nbsp;total&nbsp;digit&nbsp;sum&nbsp;of&nbsp;the&nbsp;given&nbsp;list&nbsp;of&nbsp;numbers.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-total_digitsum">total_digitsum</a>([1,&nbsp;2,&nbsp;34])<br>
+10<br>
+&gt;&gt;&gt;&nbsp;<a href="#-total_digitsum">total_digitsum</a>([1,&nbsp;4,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;4])<br>
+9<br>
+&nbsp;<br>
+(because&nbsp;1+2+3+4&nbsp;==&nbsp;10)</tt></dd></dl>
+ <dl><dt><a name="-wagonnumbers"><strong>wagonnumbers</strong></a>(wagonnumber_pattern, fromfile<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;all&nbsp;valid&nbsp;combinations&nbsp;of&nbsp;UIC&nbsp;wagon&nbsp;numbers&nbsp;based&nbsp;on&nbsp;the&nbsp;given<br>
 pattern.&nbsp;&nbsp;The&nbsp;pattern&nbsp;has&nbsp;to&nbsp;be&nbsp;of&nbsp;the&nbsp;form&nbsp;"xxxxxxx-s".&nbsp;The&nbsp;number&nbsp;of<br>
 digits&nbsp;before&nbsp;the&nbsp;dash&nbsp;is&nbsp;arbitrary.&nbsp;"s"&nbsp;is&nbsp;the&nbsp;self-check&nbsp;digit.&nbsp;Any<br>
 digit,&nbsp;including&nbsp;the&nbsp;self-check&nbsp;digit,&nbsp;may&nbsp;be&nbsp;replaced&nbsp;by&nbsp;a&nbsp;placeholder<br>
-"?".<br>
+"?".&nbsp;Whitespace&nbsp;is&nbsp;ignored.<br>
 &nbsp;<br>
-Note:&nbsp;For&nbsp;too&nbsp;many&nbsp;placeholders,&nbsp;the&nbsp;computation&nbsp;time&nbsp;can&nbsp;become&nbsp;very<br>
-large.&nbsp;&nbsp;The&nbsp;output&nbsp;can&nbsp;therefore&nbsp;be&nbsp;limited&nbsp;by&nbsp;specifying&nbsp;a&nbsp;maximum&nbsp;number<br>
-of&nbsp;output&nbsp;combinations&nbsp;"max_output"&nbsp;(default:&nbsp;10000).<br>
+If&nbsp;*fromfile*&nbsp;is&nbsp;not&nbsp;*None*,&nbsp;filter&nbsp;the&nbsp;output&nbsp;by&nbsp;the&nbsp;given&nbsp;digit&nbsp;blocks<br>
+found&nbsp;in&nbsp;the&nbsp;text&nbsp;file&nbsp;*fromfile*.&nbsp;The&nbsp;file&nbsp;must&nbsp;contain&nbsp;one&nbsp;block&nbsp;of<br>
+digits&nbsp;per&nbsp;line,&nbsp;where&nbsp;the&nbsp;number&nbsp;of&nbsp;digits&nbsp;must&nbsp;match&nbsp;the&nbsp;number&nbsp;of<br>
+placeholders&nbsp;"?"&nbsp;in&nbsp;the&nbsp;wagonnumber&nbsp;pattern.&nbsp;Dashes&nbsp;"-"&nbsp;are&nbsp;ignored,&nbsp;so&nbsp;the<br>
+file&nbsp;may&nbsp;contain&nbsp;lines&nbsp;of&nbsp;the&nbsp;form&nbsp;"xxx-s".<br>
 &nbsp;<br>
 Example&nbsp;usage:<br>
+&nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-wagonnumbers">wagonnumbers</a>('21&nbsp;80&nbsp;014&nbsp;0&nbsp;272-?')<br>
 ['21&nbsp;80&nbsp;014&nbsp;0&nbsp;272-4']<br>
 &gt;&gt;&gt;&nbsp;<a href="#-wagonnumbers">wagonnumbers</a>('33&nbsp;80&nbsp;076&nbsp;5&nbsp;11?-?')<br>
@@ -83,6 +166,13 @@ Example&nbsp;usage:<br>
 []<br>
 &gt;&gt;&gt;&nbsp;<a href="#-wagonnumbers">wagonnumbers</a>('33&nbsp;80&nbsp;076&nbsp;5&nbsp;115-5')<br>
 ['33&nbsp;80&nbsp;076&nbsp;5&nbsp;115-5']<br>
+&gt;&gt;&gt;&nbsp;<a href="#-wagonnumbers">wagonnumbers</a>('31&nbsp;80&nbsp;437&nbsp;3&nbsp;???-?',&nbsp;fromfile='era4-white')<br>
+['31&nbsp;80&nbsp;437&nbsp;3&nbsp;300-1',<br>
+&nbsp;'31&nbsp;80&nbsp;437&nbsp;3&nbsp;811-7',<br>
+&nbsp;'31&nbsp;80&nbsp;437&nbsp;3&nbsp;217-7',<br>
+&nbsp;'31&nbsp;80&nbsp;437&nbsp;3&nbsp;797-8',<br>
+&nbsp;'31&nbsp;80&nbsp;437&nbsp;3&nbsp;354-8',<br>
+&nbsp;'31&nbsp;80&nbsp;437&nbsp;3&nbsp;565-9']<br>
 &nbsp;<br>
 Background&nbsp;information:<br>
 <a href="http://en.wikipedia.org/wiki/UIC_wagon_numbers">http://en.wikipedia.org/wiki/UIC_wagon_numbers</a></tt></dd></dl>
