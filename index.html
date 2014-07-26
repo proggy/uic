@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -73,15 +71,17 @@ numbers. Check validity of self-check digits, calculate self-check digits.</p>
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="uic.wagonnumbers">
-<tt class="descclassname">uic.</tt><tt class="descname">wagonnumbers</tt><big>(</big><em>wagonnumber_pattern</em>, <em>max_output=10000</em><big>)</big><a class="headerlink" href="#uic.wagonnumbers" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">uic.</tt><tt class="descname">wagonnumbers</tt><big>(</big><em>wagonnumber_pattern</em>, <em>fromfile=None</em><big>)</big><a class="headerlink" href="#uic.wagonnumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all valid combinations of UIC wagon numbers based on the given
 pattern.  The pattern has to be of the form &#8220;xxxxxxx-s&#8221;. The number of
-digits before the dash is arbitrary. <em>s</em> is the self-check digit. Any
+digits before the dash is arbitrary. &#8220;s&#8221; is the self-check digit. Any
 digit, including the self-check digit, may be replaced by a placeholder
 &#8221;?&#8221;. Whitespace is ignored.</p>
-<p>Note: For too many placeholders, the computation time can become very
-large.  The output can therefore be limited by specifying a maximum number
-of output combinations <em>max_output</em> (default: 10000).</p>
+<p>If <em>fromfile</em> is not <em>None</em>, filter the output by the given digit blocks
+found in the text file <em>fromfile</em>. The file must contain one block of
+digits per line, where the number of digits must match the number of
+placeholders &#8221;?&#8221; in the wagonnumber pattern. Dashes &#8220;-&#8221; are ignored, so the
+file may contain lines of the form &#8220;xxx-s&#8221;.</p>
 <p>Example usage:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">wagonnumbers</span><span class="p">(</span><span class="s">&#39;21 80 014 0 272-?&#39;</span><span class="p">)</span>
 <span class="go">[&#39;21 80 014 0 272-4&#39;]</span>
@@ -100,6 +100,13 @@ of output combinations <em>max_output</em> (default: 10000).</p>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wagonnumbers</span><span class="p">(</span><span class="s">&#39;33 80 076 5 115-5&#39;</span><span class="p">)</span>
 <span class="go">[&#39;33 80 076 5 115-5&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wagonnumbers</span><span class="p">(</span><span class="s">&#39;31 80 437 3 ???-?&#39;</span><span class="p">,</span> <span class="n">fromfile</span><span class="o">=</span><span class="s">&#39;era4-white&#39;</span><span class="p">)</span>
+<span class="go">[&#39;31 80 437 3 300-1&#39;,</span>
+<span class="go"> &#39;31 80 437 3 811-7&#39;,</span>
+<span class="go"> &#39;31 80 437 3 217-7&#39;,</span>
+<span class="go"> &#39;31 80 437 3 797-8&#39;,</span>
+<span class="go"> &#39;31 80 437 3 354-8&#39;,</span>
+<span class="go"> &#39;31 80 437 3 565-9&#39;]</span>
 </pre></div>
 </div>
 <p>Background information:
@@ -309,7 +316,7 @@ left alternately by 2 and 1.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Daniel Jung.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
