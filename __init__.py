@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright notice
@@ -101,7 +101,7 @@ def wagonnumbers(wagonnumber_pattern, fromfile=None):
             fromfile = os.path.expanduser(fromfile)
             with open(fromfile, 'r') as f:
                 digitblocks = f.readlines()
-                for i in xrange(len(digitblocks)):
+                for i in range(len(digitblocks)):
                     digitblocks[i] = digitblocks[i].strip().replace('-', '')
                 #import columnize
                 #print columnize.columnize(digitblocks)
@@ -119,7 +119,7 @@ def wagonnumbers(wagonnumber_pattern, fromfile=None):
                     wagonnumbers.append(wagonnumber)
         else:
             # consider all possible combinations
-            for combind in xrange(10**qnum):
+            for combind in range(10**qnum):
                 combstr = '%0*i' % (qnum, combind)
                 comb = [int(char) for char in combstr]
                 wagonnumber = create_wagonnumber(wagonnumber_pattern, comb)
@@ -307,7 +307,7 @@ def digitsum(n):
     # 2014-01-31
     r = 0
     while n:
-        r, n = r + n % 10, n / 10
+        r, n = r + n % 10, n // 10
     return r
 
 
@@ -322,7 +322,7 @@ def diff10(n):
     2
     >>> diff10(10)
     0"""
-    return ((n-1)/10+1)*10 - n
+    return ((n-1)//10+1)*10 - n
 
 
 def multiply21(l):
@@ -336,7 +336,7 @@ def multiply21(l):
     >>> multiply21([1, 2, 0, 0, 0, 2])
     [1, 4, 0, 0, 0, 4]"""
     out = []
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         n = l[i]
         if (len(l)-i) % 2 == 1:
             n *= 2
