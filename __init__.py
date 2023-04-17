@@ -4,8 +4,8 @@
 # Copyright notice
 # ----------------
 #
-# Copyright (C) 2014 Daniel Jung
-# Contact: djungbremen@gmail.com
+# Copyright (C) 2014-2023 Daniel Jung
+# Contact: proggy@mailbox.org
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the Free
@@ -39,7 +39,8 @@ Background information
 
 http://en.wikipedia.org/wiki/UIC_wagon_numbers"""
 #
-# 2014-01-31 - 2014-06-09
+# 2014-01-31 - 2023-04-17
+__version__ = '0.0.1'
 
 import os
 import sys
@@ -104,14 +105,13 @@ def wagonnumbers(wagonnumber_pattern, fromfile=None):
                 for i in range(len(digitblocks)):
                     digitblocks[i] = digitblocks[i].strip().replace('-', '')
                 #import columnize
-                #print columnize.columnize(digitblocks)
+                #print(columnize.columnize(digitblocks))
             digitblocks
             combinds = []
             for digitblock in digitblocks:
                 if len(digitblock) != qnum:
-                    print >>sys.stderr, 'wagonnumbers: %s: ' % fromfile + \
-                                        'found block with wrong number of ' + \
-                                        'digits'
+                    print(f'wagonnumbers: {fromfile}: found block with ' +
+                          'wrong number of digits', file=sys.stderr)
                     sys.exit(1)
                 comb = [int(char) for char in digitblock]
                 wagonnumber = create_wagonnumber(wagonnumber_pattern, comb)

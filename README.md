@@ -5,11 +5,15 @@ Self-check digit calculator for UIC wagon numbers.  Tools around UIC wagon
 numbers. Check validity of self-check digits, calculate self-check digits.
 
 
-Copyright notice
+Copyright Notice
 ----------------
 
-Copyright (C) 2014 Daniel Jung.
-Contact: djungbremen@gmail.com
+Copyright (C) 2014-2023 Daniel Jung
+Contact: daniel.jung@dlr.de
+
+
+License
+-------
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free
